@@ -1,0 +1,142 @@
+MUSE AI APP-BUILD PROMPT — MR.WHO API
+Version 1.0 | Build a responsive web app UI first
+
+PROJECT GOAL
+Build a polished, responsive web application named “Mr.Who API”. Use the attached reference video/screenshots as the visual reference and recreate the same overall app structure as closely as possible without copying any proprietary source code. The existing prototype is a messaging workspace dashboard. Prioritize the visual design and working front-end interactions first; keep real WhatsApp integration clearly separated as a later backend task.
+
+DESIGN DIRECTION
+- Professional SaaS dashboard for desktop and mobile.
+- White and very light gray surfaces, dark forest-green text, WhatsApp-inspired green primary color (#087f5b), pale green highlight cards.
+- Clean cards with subtle borders, 8–12px corner radius, restrained shadows, consistent spacing.
+- Use a modern sans-serif font similar to DM Sans / Manrope.
+- Sidebar on desktop; collapsible drawer on mobile.
+- Top bar with breadcrumb, search field, notification icon, and user avatar.
+- Main dashboard content with title, subtitle, primary “Add WhatsApp” button, setup notice, metric cards, account table, activity panel, quick setup panel.
+- Make the UI look production-quality, not like a plain template. Include hover, focus, loading, empty, error, and success states.
+- Use lucide-style icons or a consistent icon set. Do not use emoji as the primary interface icons.
+- App name must always be “Mr.Who API”.
+
+SIDEBAR NAVIGATION
+1. Dashboard
+2. Inbox
+3. Contacts
+4. Campaigns
+5. Bot Replies
+6. Templates
+7. WhatsApp API
+8. Settings
+
+DASHBOARD
+At the top show:
+- Heading: “Good morning, Admin”
+- Subtitle: “Manage your WhatsApp connections and messaging tools from one place.”
+- Primary button: “Add WhatsApp”
+- Setup notice: “Connect your WhatsApp Business account”
+- Notice body: “Add an account to begin checking connection status and available health signals.”
+
+Metric cards:
+1. Total WhatsApp accounts — count actual accounts in the app.
+2. API connections — show a real count only after provider integration; otherwise show “Not connected” or “—”.
+3. Health status — show “Unknown” until verified account data is available.
+4. Ban risk — show “Not assessed” until there are real supported signals. Never fabricate a percentage or claim a ban is certain.
+
+WHATSAPP ACCOUNT LIST
+Create a responsive table with:
+- Account name/label
+- Phone number
+- Connection status
+- Health status
+- Ban risk
+- API status
+- Row actions menu
+Include search and a status filter. Show a well-designed empty state with “No WhatsApp accounts yet”, a short explanation, and an “Add WhatsApp” button. Account count must update when accounts are added or removed.
+
+ADD WHATSAPP FLOW
+When the user clicks “Add WhatsApp”, open a modal or dedicated screen with:
+- Account label (optional)
+- Phone number in international format
+- Connection method/provider selection (placeholder only until real integration is configured)
+- Cancel and Save buttons
+Validate input and display clear error/success messages.
+Important: saving a phone number is NOT the same as connecting WhatsApp. Clearly label saved-but-not-connected accounts as “Pending connection” or “Not connected”.
+Do not ask for or store WhatsApp passwords or one-time verification codes.
+Do not pretend that a phone number alone gives access to chats or health information.
+
+WHATSAPP HEALTH / BAN RISK / API STATUS
+Add a dedicated “WhatsApp API” section or monitoring screen with:
+- Connection status: Connected / Disconnected / Error / Pending setup
+- Health: Healthy / Warning / Unknown, only when the integration provides evidence
+- Ban risk: Low / Medium / High / Not assessed, only as an estimate based on actual available signals; include a short explanation of the signals and limitations.
+- Last checked timestamp and a “Check connection” action.
+- Provider configuration status.
+Never invent health scores, ban probabilities, delivery rates, or API status. If no integration exists, show “Unknown”, “Not connected”, or “Not assessed”.
+Explain that no tool can guarantee whether an account will be banned.
+
+OTHER SCREENS
+- Inbox: design a WhatsApp-style conversation layout with conversation list, search, message pane, contact details. Until integration is connected, show a clear demo/empty state; do not fabricate live chats.
+- Contacts: searchable contact table and add-contact form; use demo data only if clearly marked as sample data.
+- Campaigns: campaign list and create-campaign form. Disable real sending until backend/provider is connected.
+- Bot Replies: UI for creating keyword-based auto-reply rules. Make clear that rules will not execute until a backend webhook is configured.
+- Templates: message-template list and editor; mark provider approval requirements where relevant.
+- Settings: workspace profile, user preferences, security and provider setup. Never expose secret tokens in the browser.
+
+TECHNICAL REQUIREMENTS
+Preferred stack:
+- React + Vite
+- Responsive CSS (or Tailwind if already available)
+- Reusable components
+- lucide-react or equivalent icons
+- Local demo state for front-end prototype
+- Use environment variables for backend/API configuration
+- Do not put secret keys or access tokens in frontend code
+- Add clear loading, empty, error, success, and disabled states
+- Accessible labels, keyboard navigation, visible focus indicators
+- Mobile-first responsive behavior
+- Provide a README with exact setup/build/deployment instructions
+
+BACKEND / INTEGRATION PLAN (DO NOT FAKE THIS)
+For real WhatsApp messaging, connect through the official WhatsApp Business Platform or a supported Business Solution Provider. Backend work must include secure server-side credential storage, authenticated users, database persistence, webhook verification, provider API calls, error handling, rate-limit handling, and logs with secrets redacted.
+Do not use unofficial WhatsApp Web session scraping, QR hijacking, or methods that risk user accounts.
+Do not claim to read WhatsApp account “health” or predict bans unless supported data exists. Use official API connection state and available quality/messaging signals where accessible.
+Keep the front end usable as a demo while integration is pending.
+
+DATA MODEL SUGGESTION
+WhatsAppAccount:
+- id
+- label
+- phoneNumber
+- provider
+- connectionStatus
+- healthStatus
+- banRiskLevel
+- lastCheckedAt
+- createdAt
+- updatedAt
+Store only necessary data. Do not store WhatsApp passwords or verification codes.
+
+ACCEPTANCE CHECKLIST
+1. App branding says “Mr.Who API” everywhere.
+2. Desktop sidebar and mobile drawer both work.
+3. “Add WhatsApp” opens a working form and validates the phone number.
+4. Saving adds an account row and updates the account count.
+5. Search and status filter work on the account list.
+6. Health, risk, and API status never show fabricated live data.
+7. All navigation items open a relevant screen or clearly marked placeholder.
+8. Layout works at 360px mobile width, tablet width, and desktop.
+9. README explains how to install, run, build, and deploy.
+10. Deliver the full source code, not just a screenshot or design mockup.
+
+DELIVERABLES
+- Complete source code in a project folder.
+- A ZIP archive of the project.
+- README with run/build/deployment instructions.
+- A list of any unfinished integration items.
+- If Android is requested, provide a separate Android packaging plan using Capacitor or Android Studio; do not claim an APK exists unless it is actually built and tested.
+
+IMPORTANT WORK SPLIT
+Phase 1 (now): Build the polished UI, navigation, responsive behavior, add-account form, account list, and truthful placeholder statuses.
+Phase 2: Add backend authentication and database.
+Phase 3: Integrate official WhatsApp Business Platform/provider and webhooks.
+Phase 4: Deploy website.
+Phase 5: Package/test Android APK.
+Do not attempt to finish every integration in Phase 1 by inventing data. Keep each phase clearly documented.
